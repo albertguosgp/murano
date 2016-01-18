@@ -1,0 +1,2 @@
+Murano System Inc
+Murano oms version is : ${application.version}

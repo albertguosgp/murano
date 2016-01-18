@@ -1,0 +1,55 @@
+server:
+    port: 9000
+flyway:
+    enabled: false
+logging:
+    level.: INFO
+spring:
+    mail:
+      host: localhost
+      port: 3025 # 3025 is default SMTP port for Green mail. Each development or application profile should override this value.
+      default-encoding: UTF-8
+      attachment:
+        threshold: # if attachment size exceed threshold defined here, location of attachment in server will be sent instead of email attachment.
+          5000000
+    jackson:
+      date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+application:
+    support:
+      email: fxsupport@flextrade.com
+product:
+    id: default
+preference:
+    timezone: America/New_York
+---
+
+spring:
+    profiles: db-migrate
+flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/maxxdb
+    user: maxxsys
+    password: Flex123!
+---
+spring:
+    profiles: development
+    mail:
+      host: 10.4.1.6
+      port: 25
+      default-encoding: UTF-8
+      attachment:
+      threshold: 5000000
+    jackson:
+          date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+logging:
+    level. : INFO
+
+---
+spring:
+  profiles: integration-test
+flyway:
+  enabled: true
+  url: jdbc:postgresql://localhost:5432/maxxdb
+  user: maxxsys
+  password: Flex123!
+---
